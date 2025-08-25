@@ -1,0 +1,6 @@
+http://apis.onecloud.harman.com/
+http://events.onecloud.harman.com/
+https://edgeapis.onecloud.harman.com/geo-location
+http://apis.onecloud.harman.com/
+http://events.onecloud.harman.com/
+https://edgeapis.onecloud.harman.com/geo-location

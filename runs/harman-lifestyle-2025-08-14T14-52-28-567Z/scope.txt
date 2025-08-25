@@ -1,0 +1,6 @@
+events.onecloud.harman.com
+ota.onecloud.harman.com
+apis.onecloud.harman.com
+edgeapis.onecloud.harman.com
+tms.onecloud.harman.com
+quantum-events.onecloud.harman.com

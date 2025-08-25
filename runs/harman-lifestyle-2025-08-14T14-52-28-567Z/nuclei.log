@@ -1,0 +1,93 @@
+[nuclei] targets → ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts_scoped.txt
+
+                     __     _
+   ____  __  _______/ /__  (_)
+  / __ \/ / / / ___/ / _ \/ /
+ / / / / /_/ / /__/ /  __/ /
+/_/ /_/\__,_/\___/_/\___/_/   v3.4.7
+
+		projectdiscovery.io
+
+[[93mWRN[0m] The concurrency value is higher than max-host-error
+[[34mINF[0m] Adjusting max-host-error to the concurrency value: 50
+[[31mWRN[0m] Found 1 templates with syntax error (use -validate flag for further examination)
+[[34mINF[0m] Current nuclei version: v3.4.7 ([92mlatest[0m)
+[[34mINF[0m] Current nuclei-templates version: v10.2.7 ([92mlatest[0m)
+[[93mWRN[0m] Scan results upload to cloud is disabled.
+[[34mINF[0m] New templates added in latest release: 55
+[[34mINF[0m] Templates loaded for current scan: 5022
+[[34mINF[0m] Executing 5015 signed templates from projectdiscovery/nuclei-templates
+[[93mWRN[0m] Loading 7 unsigned templates for scan. Use with caution.
+[[34mINF[0m] Targets loaded for current scan: 1
+[[34mINF[0m] Templates clustered: 305 (Reduced 258 Requests)
+[0:00:10] | Templates: 5022 | Hosts: 1 | RPS: 9 | Matched: 0 | Errors: 0 | Requests: 98/11841 (0%)
+[0:00:20] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 0 | Requests: 144/11841 (1%)
+[0:00:30] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 0 | Requests: 223/11841 (1%)
+[0:00:40] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 0 | Requests: 294/11841 (2%)
+[0:00:50] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 0 | Requests: 414/11841 (3%)
+[0:01:00] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 0 | Requests: 475/11841 (4%)
+[0:01:10] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 0 | Requests: 570/11841 (4%)
+[0:01:20] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 0 | Requests: 633/11841 (5%)
+[0:01:30] | Templates: 5022 | Hosts: 1 | RPS: 9 | Matched: 0 | Errors: 4 | Requests: 892/11841 (7%)
+[0:01:40] | Templates: 5022 | Hosts: 1 | RPS: 9 | Matched: 0 | Errors: 4 | Requests: 977/11841 (8%)
+[0:01:50] | Templates: 5022 | Hosts: 1 | RPS: 9 | Matched: 0 | Errors: 4 | Requests: 1078/11841 (9%)
+[0:02:00] | Templates: 5022 | Hosts: 1 | RPS: 9 | Matched: 0 | Errors: 5 | Requests: 1145/11841 (9%)
+[0:02:10] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 5 | Requests: 1149/11841 (9%)
+[0:02:20] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 5 | Requests: 1213/11841 (10%)
+[0:02:30] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 5 | Requests: 1280/11841 (10%)
+[0:02:40] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 5 | Requests: 1328/11841 (11%)
+[0:02:50] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 5 | Requests: 1409/11841 (11%)
+[0:03:00] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 6 | Requests: 1489/11841 (12%)
+[0:03:10] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 6 | Requests: 1562/11841 (13%)
+[0:03:20] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 6 | Requests: 1629/11841 (13%)
+[0:03:30] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 6 | Requests: 1695/11841 (14%)
+[0:03:40] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 1759/11841 (14%)
+[0:03:50] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 1831/11841 (15%)
+[0:04:00] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 1904/11841 (16%)
+[0:04:10] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 1965/11841 (16%)
+[0:04:20] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2025/11841 (17%)
+[0:04:30] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2087/11841 (17%)
+[0:04:40] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2160/11841 (18%)
+[0:04:50] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2216/11841 (18%)
+[0:05:00] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2285/11841 (19%)
+[0:05:10] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2368/11841 (19%)
+[0:05:20] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2444/11841 (20%)
+[0:05:30] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2538/11841 (21%)
+[0:05:40] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2651/11841 (22%)
+[0:05:50] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2732/11841 (23%)
+[0:06:00] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2805/11841 (23%)
+[0:06:10] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2865/11841 (24%)
+[0:06:20] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 2938/11841 (24%)
+[0:06:30] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3013/11841 (25%)
+[0:06:40] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3093/11841 (26%)
+[0:06:50] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3177/11841 (26%)
+[0:07:00] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3257/11841 (27%)
+[0:07:10] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3328/11841 (28%)
+[0:07:20] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3413/11841 (28%)
+[0:07:30] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3485/11841 (29%)
+[0:07:40] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3553/11841 (30%)
+[0:07:50] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3695/11841 (31%)
+[0:08:00] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3761/11841 (31%)
+[0:08:10] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3870/11841 (32%)
+[0:08:20] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3947/11841 (33%)
+[0:08:30] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 7 | Requests: 3989/11841 (33%)
+[0:08:40] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 9 | Requests: 4063/11841 (34%)
+[0:08:50] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 9 | Requests: 4120/11841 (34%)
+[0:09:00] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 9 | Requests: 4222/11841 (35%)
+[0:09:10] | Templates: 5022 | Hosts: 1 | RPS: 7 | Matched: 0 | Errors: 9 | Requests: 4267/11841 (36%)
+[0:09:20] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 9 | Requests: 4722/11841 (39%)
+[0:09:30] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 9 | Requests: 4814/11841 (40%)
+[0:09:40] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 9 | Requests: 4903/11841 (41%)
+[0:09:50] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 9 | Requests: 4980/11841 (42%)
+[0:10:00] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 9 | Requests: 5035/11841 (42%)
+[0:10:10] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 24 | Requests: 5145/11841 (43%)
+[0:10:20] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 24 | Requests: 5436/11841 (45%)
+[0:10:30] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 24 | Requests: 5472/11841 (46%)
+[0:10:40] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 24 | Requests: 5487/11841 (46%)
+[0:10:50] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 24 | Requests: 5544/11841 (46%)
+[0:11:00] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 24 | Requests: 5549/11841 (46%)
+[0:11:10] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 24 | Requests: 5596/11841 (47%)
+[0:11:20] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 24 | Requests: 5672/11841 (47%)
+[0:11:30] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 24 | Requests: 5728/11841 (48%)
+[0:11:40] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 24 | Requests: 5750/11841 (48%)
+[0:11:50] | Templates: 5022 | Hosts: 1 | RPS: 8 | Matched: 0 | Errors: 24 | Requests: 5783/11841 (48%)

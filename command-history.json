@@ -1,0 +1,292 @@
+[
+  {
+    "command": "subfinder -d runs/$RUN/scope.txt -silent | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/subs.txt",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T04:18:52.081Z"
+  },
+  {
+    "command": "assetfinder runs/$RUN/scope.txt | sort -u | tee -a ./runs/2025-08-11T04-18-20-305Z/subs.txt",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T04:18:56.964Z"
+  },
+  {
+    "command": "curl -s ${XBB:+-H \"$XBB\"} \"https://crt.sh/?q=%25.runs/$RUN/scope.txt&output=json\" | jq -r '.[].name_value' | sed 's/\\*\\.//g' | sort -u | tee -a ./runs/2025-08-11T04-18-20-305Z/subs.txt",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T04:18:57.676Z"
+  },
+  {
+    "command": "if [ -f \"./runs/2025-08-11T04-18-20-305Z/scope_urls.txt\" ]; then   awk '{print $0}' ./runs/2025-08-11T04-18-20-305Z/scope_urls.txt | gau | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/urls.txt; else   gau runs/$RUN/scope.txt | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/urls.txt; fi",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T04:18:58.693Z"
+  },
+  {
+    "command": "mkdir -p ./runs/2025-08-11T04-18-20-305Z/js; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/2025-08-11T04-18-20-305Z/urls.txt; else cat ./runs/2025-08-11T04-18-20-305Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | grep -Ei '\\.js(\\?|$)' | sort -u > ./runs/2025-08-11T04-18-20-305Z/js_urls.txt; while read -r u; do [ -z \"$u\" ] && continue; f=\"./runs/2025-08-11T04-18-20-305Z/js/$(echo \"$u\" | sed 's#https\\?://##; s#[^A-Za-z0-9._-]#_#g')\"; curl -sSL ${XBB:+-H \"$XBB\"} \"$u\" -o \"$f\"; done < ./runs/2025-08-11T04-18-20-305Z/js_urls.txt; python3 -m linkfinder -i ./runs/2025-08-11T04-18-20-305Z/js/*.js -o cli | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/linkfinder.txt",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T04:19:03.163Z"
+  },
+  {
+    "command": "if [ -f \"./runs/2025-08-11T04-18-20-305Z/scope_urls.txt\" ]; then   awk '{print $0}' ./runs/2025-08-11T04-18-20-305Z/scope_urls.txt | gau | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/urls.txt; else   gau runs/2025-08-11T04-18-20-305Z/scope.txt | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/urls.txt; fi",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T05:41:24.089Z"
+  },
+  {
+    "command": "timeout ${KATANA_TIMEOUT:-600}s katana -list ./runs/2025-08-11T04-18-20-305Z/hosts.txt -jc -aff -fs -d 1 -ct 10 -kf ${RPS:+-rl $RPS} ${XBB:+-H \"$XBB\"} -o ./runs/2025-08-11T04-18-20-305Z/katana.txt || echo \"[katana] timed out after ${KATANA_TIMEOUT:-600}s\"; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/2025-08-11T04-18-20-305Z/katana.txt; else cat ./runs/2025-08-11T04-18-20-305Z/katana.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | sort -u | tee -a ./runs/2025-08-11T04-18-20-305Z/urls.txt",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T05:41:58.889Z"
+  },
+  {
+    "command": "mkdir -p ./runs/2025-08-11T04-18-20-305Z/js; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/2025-08-11T04-18-20-305Z/urls.txt; else cat ./runs/2025-08-11T04-18-20-305Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | grep -Ei '\\.js(\\?|$)' | sort -u > ./runs/2025-08-11T04-18-20-305Z/js_urls.txt; while read -r u; do [ -z \"$u\" ] && continue; f=\"./runs/2025-08-11T04-18-20-305Z/js/$(echo \"$u\" | sed 's#https\\?://##; s#[^A-Za-z0-9._-]#_#g')\"; curl -sSL ${XBB:+-H \"$XBB\"} \"$u\" -o \"$f\"; done < ./runs/2025-08-11T04-18-20-305Z/js_urls.txt; python3 -m linkfinder -i ./runs/2025-08-11T04-18-20-305Z/js/*.js -o cli | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/linkfinder.txt",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T05:51:59.130Z"
+  },
+  {
+    "command": "HF=\"./runs/2025-08-11T04-18-20-305Z/hosts.txt\"; [ -s \"./runs/2025-08-11T04-18-20-305Z/hosts_scoped.txt\" ] && HF=\"./runs/2025-08-11T04-18-20-305Z/hosts_scoped.txt\"; echo \"[nuclei] targets → $HF\"; timeout ${NUCLEI_TIMEOUT:-900}s nuclei -l \"$HF\" ${XBB:+-H \"$XBB\"} ${RPS:+-rate-limit $RPS} -type http -severity ${NUCLEI_SEV:-high,critical} -rl ${RPS:-10} -c 50 -bulk-size 25 -timeout 5 -retries 1 -stats -stats-interval 10 | tee ./runs/2025-08-11T04-18-20-305Z/nuclei.txt; RC=$?; [ $RC -ne 0 ] && echo \"[nuclei] exited with code $RC (timeout or early stop)\"; true",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T10:15:47.562Z"
+  },
+  {
+    "command": "HF=\"./runs/2025-08-11T04-18-20-305Z/hosts.txt\"; [ -s \"./runs/2025-08-11T04-18-20-305Z/hosts_scoped.txt\" ] && HF=\"./runs/2025-08-11T04-18-20-305Z/hosts_scoped.txt\"; echo \"[nuclei] targets → $HF\"; timeout ${NUCLEI_TIMEOUT:-900}s nuclei -l \"$HF\" ${XBB:+-H \"$XBB\"} ${RPS:+-rate-limit $RPS} -type http -severity ${NUCLEI_SEV:-high,critical} -rl ${RPS:-10} -c 50 -bulk-size 25 -timeout 5 -retries 1 -stats -stats-interval 10 | tee ./runs/2025-08-11T04-18-20-305Z/nuclei.txt; RC=$?; [ $RC -ne 0 ] && echo \"[nuclei] exited with code $RC (timeout or early stop)\"; true",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T15:03:08.156Z"
+  },
+  {
+    "command": "if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/2025-08-11T04-18-20-305Z/urls.txt; else cat ./runs/2025-08-11T04-18-20-305Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | grep -F '?' > ./runs/2025-08-11T04-18-20-305Z/urls_with_params.txt; dalfox file ./runs/2025-08-11T04-18-20-305Z/urls_with_params.txt ${XBB:+-H \"$XBB\"} --silence --mass | tee ./runs/2025-08-11T04-18-20-305Z/dalfox.txt",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T15:18:08.262Z"
+  },
+  {
+    "command": "if [ -f \"./runs/2025-08-11T04-18-20-305Z/scope_urls.txt\" ]; then   awk '{print $0}' ./runs/2025-08-11T04-18-20-305Z/scope_urls.txt | gau | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/urls.txt; else   gau runs/2025-08-11T04-18-20-305Z/scope.txt | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/urls.txt; fi",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T22:40:42.081Z"
+  },
+  {
+    "command": "if [ -f \"./runs/2025-08-11T04-18-20-305Z/scope_urls.txt\" ]; then   while read -r u; do printf \"%s\\n\" \"$u\" | waybackurls; done < ./runs/2025-08-11T04-18-20-305Z/scope_urls.txt | sort -u | tee -a ./runs/2025-08-11T04-18-20-305Z/urls.txt; else   echo runs/2025-08-11T04-18-20-305Z/scope.txt | waybackurls | sort -u | tee -a ./runs/2025-08-11T04-18-20-305Z/urls.txt; fi",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T22:41:40.935Z"
+  },
+  {
+    "command": "timeout ${KATANA_TIMEOUT:-600}s katana -list ./runs/2025-08-11T04-18-20-305Z/hosts.txt -jc -aff -fs -d 1 -ct 10 -kf ${RPS:+-rl $RPS} ${XBB:+-H \"$XBB\"} -o ./runs/2025-08-11T04-18-20-305Z/katana.txt || echo \"[katana] timed out after ${KATANA_TIMEOUT:-600}s\"; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/2025-08-11T04-18-20-305Z/katana.txt; else cat ./runs/2025-08-11T04-18-20-305Z/katana.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | sort -u | tee -a ./runs/2025-08-11T04-18-20-305Z/urls.txt",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T22:41:52.494Z"
+  },
+  {
+    "command": "mkdir -p ./runs/2025-08-11T04-18-20-305Z/js; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/2025-08-11T04-18-20-305Z/urls.txt; else cat ./runs/2025-08-11T04-18-20-305Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | grep -Ei '\\.js(\\?|$)' | sort -u > ./runs/2025-08-11T04-18-20-305Z/js_urls.txt; while read -r u; do [ -z \"$u\" ] && continue; f=\"./runs/2025-08-11T04-18-20-305Z/js/$(echo \"$u\" | sed 's#https\\?://##; s#[^A-Za-z0-9._-]#_#g')\"; curl -sSL ${XBB:+-H \"$XBB\"} \"$u\" -o \"$f\"; done < ./runs/2025-08-11T04-18-20-305Z/js_urls.txt; python3 -m linkfinder -i ./runs/2025-08-11T04-18-20-305Z/js/*.js -o cli | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/linkfinder.txt",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-11T22:51:52.573Z"
+  },
+  {
+    "command": "if [ -f \"./runs/2025-08-11T04-18-20-305Z/scope_urls.txt\" ]; then   awk '{print $0}' ./runs/2025-08-11T04-18-20-305Z/scope_urls.txt | gau | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/urls.txt; else   gau runs/2025-08-11T04-18-20-305Z/scope.txt | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/urls.txt; fi",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-12T00:30:43.769Z"
+  },
+  {
+    "command": "if [ -f \"./runs/2025-08-11T04-18-20-305Z/scope_urls.txt\" ]; then   while read -r u; do printf \"%s\\n\" \"$u\" | waybackurls; done < ./runs/2025-08-11T04-18-20-305Z/scope_urls.txt | sort -u | tee -a ./runs/2025-08-11T04-18-20-305Z/urls.txt; else   echo runs/2025-08-11T04-18-20-305Z/scope.txt | waybackurls | sort -u | tee -a ./runs/2025-08-11T04-18-20-305Z/urls.txt; fi",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-12T00:32:37.480Z"
+  },
+  {
+    "command": "timeout ${KATANA_TIMEOUT:-600}s katana -list ./runs/2025-08-11T04-18-20-305Z/hosts.txt -jc -aff -fs -d 1 -ct 10 -kf ${RPS:+-rl $RPS} ${XBB:+-H \"$XBB\"} -o ./runs/2025-08-11T04-18-20-305Z/katana.txt || echo \"[katana] timed out after ${KATANA_TIMEOUT:-600}s\"; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/2025-08-11T04-18-20-305Z/katana.txt; else cat ./runs/2025-08-11T04-18-20-305Z/katana.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | sort -u | tee -a ./runs/2025-08-11T04-18-20-305Z/urls.txt",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-12T00:32:51.009Z"
+  },
+  {
+    "command": "mkdir -p ./runs/2025-08-11T04-18-20-305Z/js; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/2025-08-11T04-18-20-305Z/urls.txt; else cat ./runs/2025-08-11T04-18-20-305Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | grep -Ei '\\.js(\\?|$)' | sort -u > ./runs/2025-08-11T04-18-20-305Z/js_urls.txt; while read -r u; do [ -z \"$u\" ] && continue; f=\"./runs/2025-08-11T04-18-20-305Z/js/$(echo \"$u\" | sed 's#https\\?://##; s#[^A-Za-z0-9._-]#_#g')\"; curl -sSL ${XBB:+-H \"$XBB\"} \"$u\" -o \"$f\"; done < ./runs/2025-08-11T04-18-20-305Z/js_urls.txt; python3 -m linkfinder -i ./runs/2025-08-11T04-18-20-305Z/js/*.js -o cli | sort -u | tee ./runs/2025-08-11T04-18-20-305Z/linkfinder.txt",
+    "runId": "2025-08-11T04-18-20-305Z",
+    "timestamp": "2025-08-12T00:42:51.087Z"
+  },
+  {
+    "command": "subfinder -d runs/$RUN/scope.txt -silent | sort -u | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T15:20:12.704Z"
+  },
+  {
+    "command": "subfinder -dL runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt -silent | sort -u | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T16:35:19.174Z"
+  },
+  {
+    "command": "subfinder -dL runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt -silent | sort -u | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T16:36:46.108Z"
+  },
+  {
+    "command": "amass enum -passive -df runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt | sort -u | tee -a ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T16:37:32.426Z"
+  },
+  {
+    "command": "xargs -a runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt -I{} assetfinder {} | sort -u | tee -a ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T16:46:13.071Z"
+  },
+  {
+    "command": "while read -r d; do curl -s ${XBB:+-H \"$XBB\"} \"https://crt.sh/?q=%25.$d&output=json\" | jq -r '.[].name_value' 2>/dev/null; done < runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt | sed 's/\\*\\.//g' | sort -u | tee -a ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T16:48:13.571Z"
+  },
+  {
+    "command": "cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt | httpx -silent -status-code -title -ip ${XBB:+-H \"$XBB\"} | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T16:49:27.527Z"
+  },
+  {
+    "command": "nmap -Pn -sV -T4 -iL ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt -oN ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/nmap.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T16:49:30.934Z"
+  },
+  {
+    "command": "cat runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt | xargs -I{} gau -subs {} | sort -u | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T16:53:19.977Z"
+  },
+  {
+    "command": "cat runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt | waybackurls | sort -u | tee -a ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T16:53:21.120Z"
+  },
+  {
+    "command": "timeout ${KATANA_TIMEOUT:-600}s katana -list ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts.txt -jc -aff -fs -d 1 -ct 10 ${RPS:+-rl $RPS} ${XBB:+-H \"$XBB\"} -o ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt || echo \"[katana] timed out after ${KATANA_TIMEOUT:-600}s\"; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt; else cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | sort -u | tee -a ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T16:53:39.840Z"
+  },
+  {
+    "command": "mkdir -p ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt; else cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | grep -Ei '\\.js(\\?|$)' | sort -u > ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js_urls.txt; while read -r u; do [ -z \"$u\" ] && continue; f=\"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js/$(echo \"$u\" | sed 's#https\\?://##; s#[^A-Za-z0-9._-]#_#g')\"; curl -sSL ${XBB:+-H \"$XBB\"} \"$u\" -o \"$f\"; done < ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js_urls.txt; python3 -m linkfinder -i ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js/*.js -o cli | sort -u | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/linkfinder.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T17:03:40.934Z"
+  },
+  {
+    "command": "HF=\"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts.txt\"; [ -s \"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts_scoped.txt\" ] && HF=\"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts_scoped.txt\"; echo \"[nuclei] targets → $HF\"; timeout ${NUCLEI_TIMEOUT:-900}s nuclei -l \"$HF\" ${XBB:+-H \"$XBB\"} ${RPS:+-rate-limit $RPS} -type http -severity ${NUCLEI_SEV:-medium,high,critical} -c 50 -bulk-size 25 -timeout 5 -retries 1 -stats -stats-interval 10 | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/nuclei.txt; RC=$?; [ $RC -ne 0 ] && echo \"[nuclei] exited with code $RC (timeout or early stop)\"; true",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T17:03:42.445Z"
+  },
+  {
+    "command": "if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt; else cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | grep -F '?' > ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls_with_params.txt; dalfox file ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls_with_params.txt ${XBB:+-H \"$XBB\"} --silence --mass | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/dalfox.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T17:18:43.760Z"
+  },
+  {
+    "command": "subfinder -dL runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt -silent | sort -u | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T17:40:30.950Z"
+  },
+  {
+    "command": "amass enum -passive -df runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt | sort -u | tee -a ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T17:41:23.793Z"
+  },
+  {
+    "command": "xargs -a runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt -I{} assetfinder {} | sort -u | tee -a ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T17:50:04.635Z"
+  },
+  {
+    "command": "while read -r d; do curl -s ${XBB:+-H \"$XBB\"} \"https://crt.sh/?q=%25.$d&output=json\" | jq -r '.[].name_value' 2>/dev/null; done < runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt | sed 's/\\*\\.//g' | sort -u | tee -a ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T17:51:49.791Z"
+  },
+  {
+    "command": "cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt | httpx -silent -status-code -title -ip ${XBB:+-H \"$XBB\"} | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T17:53:20.837Z"
+  },
+  {
+    "command": "nmap -Pn -sV -T4 -iL ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt -oN ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/nmap.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T17:53:24.046Z"
+  },
+  {
+    "command": "cat runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt | xargs -I{} gau --subs {} | sort -u | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T17:57:11.370Z"
+  },
+  {
+    "command": "cat runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt | waybackurls | sort -u | tee -a ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T17:58:29.716Z"
+  },
+  {
+    "command": "timeout ${KATANA_TIMEOUT:-600}s katana -list ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts.txt -jc -aff -fs -d 1 -ct 10 ${RPS:+-rl $RPS} ${XBB:+-H \"$XBB\"} -o ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt || echo \"[katana] timed out after ${KATANA_TIMEOUT:-600}s\"; if [ -s \"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt\" ]; then if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt; else cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | sort -u | tee -a ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt; else echo \"[katana] no output file (./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt)\"; fi",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T17:58:45.981Z"
+  },
+  {
+    "command": "mkdir -p ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt; else cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | grep -Ei '\\.js([?]|$)' | sort -u > ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js_urls.txt; while read -r u; do [ -z \"$u\" ] && continue; f=\"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js/$(echo \"$u\" | sed 's#https\\?://##; s#[^A-Za-z0-9._-]#_#g')\"; curl -sSL ${XBB:+-H \"$XBB\"} \"$u\" -o \"$f\"; done < ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js_urls.txt; if python3 -c \"import linkfinder\" 2>/dev/null; then if ls ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js/*.js >/dev/null 2>&1; then python3 -m linkfinder -i ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js/*.js -o cli | sort -u | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/linkfinder.txt; else echo \"[linkfinder] no JS files to analyze\" | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/linkfinder.txt; fi; else echo \"[linkfinder] python module not installed (pip install linkfinder)\" | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/linkfinder.txt; fi",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T18:08:47.085Z"
+  },
+  {
+    "command": "HF=\"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts.txt\"; [ -s \"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts_scoped.txt\" ] && HF=\"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts_scoped.txt\"; echo \"[nuclei] targets → $HF\"; timeout ${NUCLEI_TIMEOUT:-900}s nuclei -l \"$HF\" ${XBB:+-H \"$XBB\"} ${RPS:+-rate-limit $RPS} -type http -severity ${NUCLEI_SEV:-medium,high,critical} -c 50 -bulk-size 25 -timeout 5 -retries 1 -stats -stats-interval 10 | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/nuclei.txt; RC=$?; [ $RC -ne 0 ] && echo \"[nuclei] exited with code $RC (timeout or early stop)\"; true",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T18:08:48.493Z"
+  },
+  {
+    "command": "if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt; else cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | awk 'index($0,\"?\")' > ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls_with_params.txt; dalfox file ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls_with_params.txt ${XBB:+-H \"$XBB\"} --silence --mass | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/dalfox.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T18:23:49.583Z"
+  },
+  {
+    "command": "cat runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt | xargs -I{} gau --subs {} | sort -u | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T19:36:39.352Z"
+  },
+  {
+    "command": "cat runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt | waybackurls | sort -u | tee -a ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T19:38:04.097Z"
+  },
+  {
+    "command": "timeout ${KATANA_TIMEOUT:-600}s katana -list ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts.txt -jc -aff -fs -d 1 -ct 10 ${RPS:+-rl $RPS} ${XBB:+-H \"$XBB\"} -o ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt || echo \"[katana] timed out after ${KATANA_TIMEOUT:-600}s\"; if [ -s \"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt\" ]; then if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt; else cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | sort -u | tee -a ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt; else echo \"[katana] no output file (./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/katana.txt)\"; fi",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T19:38:52.633Z"
+  },
+  {
+    "command": "mkdir -p ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt; else cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | grep -Ei '\\.js([?]|$)' | sort -u > ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js_urls.txt; while read -r u; do [ -z \"$u\" ] && continue; f=\"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js/$(echo \"$u\" | sed 's#https\\?://##; s#[^A-Za-z0-9._-]#_#g')\"; curl -sSL ${XBB:+-H \"$XBB\"} \"$u\" -o \"$f\"; done < ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js_urls.txt; if python3 -c \"import linkfinder\" 2>/dev/null; then if ls ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js/*.js >/dev/null 2>&1; then python3 -m linkfinder -i ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/js/*.js -o cli | sort -u | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/linkfinder.txt; else echo \"[linkfinder] no JS files to analyze\" | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/linkfinder.txt; fi; else echo \"[linkfinder] python module not installed (pip install linkfinder)\" | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/linkfinder.txt; fi",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T19:48:53.734Z"
+  },
+  {
+    "command": "HF=\"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts.txt\"; [ -s \"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts_scoped.txt\" ] && HF=\"./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts_scoped.txt\"; echo \"[nuclei] targets → $HF\"; timeout ${NUCLEI_TIMEOUT:-900}s nuclei -l \"$HF\" ${XBB:+-H \"$XBB\"} ${RPS:+-rate-limit $RPS} -type http -severity ${NUCLEI_SEV:-medium,high,critical} -c 50 -bulk-size 25 -timeout 5 -retries 1 -stats -stats-interval 10 | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/nuclei.txt; RC=$?; [ $RC -ne 0 ] && echo \"[nuclei] exited with code $RC (timeout or early stop)\"; true",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T19:48:55.460Z"
+  },
+  {
+    "command": "if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt; else cat ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | awk 'index($0,\"?\")' > ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls_with_params.txt; dalfox file ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/urls_with_params.txt ${XBB:+-H \"$XBB\"} --silence --mass | tee ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/dalfox.txt",
+    "runId": "harman-lifestyle-2025-08-14T14-52-28-567Z",
+    "timestamp": "2025-08-14T20:03:56.718Z"
+  },
+  {
+    "command": "cat runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt | xargs -I{} gau --subs {} | sort -u | tee ./runs/2025-08-14T20-17-29-974Z/urls.txt",
+    "runId": "2025-08-14T20-17-29-974Z",
+    "timestamp": "2025-08-14T20:22:46.855Z"
+  },
+  {
+    "command": "cat runs/harman-lifestyle-2025-08-14T14-52-28-567Z/scope.txt | waybackurls | sort -u | tee -a ./runs/2025-08-14T20-17-29-974Z/urls.txt",
+    "runId": "2025-08-14T20-17-29-974Z",
+    "timestamp": "2025-08-14T20:23:36.770Z"
+  },
+  {
+    "command": "mkdir -p ./runs/2025-08-14T20-17-29-974Z/js; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/2025-08-14T20-17-29-974Z/urls.txt; else cat ./runs/2025-08-14T20-17-29-974Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | awk 'tolower($0) ~ /\\.js(\\?|$)/' | sort -u > ./runs/2025-08-14T20-17-29-974Z/js_urls.txt; while read -r u; do [ -z \"$u\" ] && continue; f=\"./runs/2025-08-14T20-17-29-974Z/js/$(echo \"$u\" | sed 's#https\\?://##; s#[^A-Za-z0-9._-]#_#g')\"; curl -sSL ${XBB:+-H \"$XBB\"} \"$u\" -o \"$f\"; done < ./runs/2025-08-14T20-17-29-974Z/js_urls.txt; if python3 -c \"import linkfinder\" 2>/dev/null; then if ls ./runs/2025-08-14T20-17-29-974Z/js/*.js >/dev/null 2>&1; then python3 -m linkfinder -i ./runs/2025-08-14T20-17-29-974Z/js/*.js -o cli | sort -u | tee ./runs/2025-08-14T20-17-29-974Z/linkfinder.txt; else echo \"[linkfinder] no JS files to analyze\" | tee ./runs/2025-08-14T20-17-29-974Z/linkfinder.txt; fi; else echo \"[linkfinder] python module not installed (pip install 'git+https://github.com/GerbenJavado/LinkFinder.git')\" | tee ./runs/2025-08-14T20-17-29-974Z/linkfinder.txt; fi",
+    "runId": "2025-08-14T20-17-29-974Z",
+    "timestamp": "2025-08-14T20:24:36.877Z"
+  },
+  {
+    "command": "if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/2025-08-14T20-17-29-974Z/urls.txt; else cat ./runs/2025-08-14T20-17-29-974Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | awk 'index($0,\"?\")' > ./runs/2025-08-14T20-17-29-974Z/urls_with_params.txt; dalfox file ./runs/2025-08-14T20-17-29-974Z/urls_with_params.txt ${XBB:+-H \"$XBB\"} --silence --mass | tee ./runs/2025-08-14T20-17-29-974Z/dalfox.txt",
+    "runId": "2025-08-14T20-17-29-974Z",
+    "timestamp": "2025-08-14T20:24:38.783Z"
+  },
+  {
+    "command": "cat runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts_scoped.txt | xargs -I{} gau --subs {} | sort -u | tee ./runs/2025-08-14T20-17-29-974Z/urls.txt",
+    "runId": "2025-08-14T20-17-29-974Z",
+    "timestamp": "2025-08-14T20:35:57.709Z"
+  },
+  {
+    "command": "cat runs/harman-lifestyle-2025-08-14T14-52-28-567Z/hosts_scoped.txt | waybackurls | sort -u | tee -a ./runs/2025-08-14T20-17-29-974Z/urls.txt",
+    "runId": "2025-08-14T20-17-29-974Z",
+    "timestamp": "2025-08-14T20:36:17.948Z"
+  },
+  {
+    "command": "mkdir -p ./runs/2025-08-14T20-17-29-974Z/js; if [ -z \"$GEARZ_SKIP\" ]; then cat ./runs/2025-08-14T20-17-29-974Z/urls.txt; else cat ./runs/2025-08-14T20-17-29-974Z/urls.txt | grep -vE \"${GEARZ_SKIP:+$(echo \"$GEARZ_SKIP\" | sed \"s#,#|#g\" | sed \"s#/#\\\\/#g\")}\"; fi | awk 'tolower($0) ~ /\\.js(\\?|$)/' | sort -u > ./runs/2025-08-14T20-17-29-974Z/js_urls.txt; while read -r u; do [ -z \"$u\" ] && continue; f=\"./runs/2025-08-14T20-17-29-974Z/js/$(echo \"$u\" | sed 's#https\\?://##; s#[^A-Za-z0-9._-]#_#g')\"; curl -sSL ${XBB:+-H \"$XBB\"} \"$u\" -o \"$f\"; done < ./runs/2025-08-14T20-17-29-974Z/js_urls.txt; if python3 -c \"import linkfinder\" 2>/dev/null; then if ls ./runs/2025-08-14T20-17-29-974Z/js/*.js >/dev/null 2>&1; then python3 -m linkfinder -i ./runs/2025-08-14T20-17-29-974Z/js/*.js -o cli | sort -u | tee ./runs/2025-08-14T20-17-29-974Z/linkfinder.txt; else echo \"[linkfinder] no JS files to analyze\" | tee ./runs/2025-08-14T20-17-29-974Z/linkfinder.txt; fi; else echo \"[linkfinder] python module not installed (pip install 'git+https://github.com/GerbenJavado/LinkFinder.git')\" | tee ./runs/2025-08-14T20-17-29-974Z/linkfinder.txt; fi",
+    "runId": "2025-08-14T20-17-29-974Z",
+    "timestamp": "2025-08-14T20:36:26.641Z"
+  }
+]

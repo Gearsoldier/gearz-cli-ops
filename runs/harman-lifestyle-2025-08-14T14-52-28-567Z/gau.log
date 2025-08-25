@@ -1,0 +1,9 @@
+time="2025-08-14T15:36:39-04:00" level=warning msg="error reading config: Config file /home/gear/.gau.toml not found, using default config"
+time="2025-08-14T15:36:52-04:00" level=warning msg="error reading config: Config file /home/gear/.gau.toml not found, using default config"
+time="2025-08-14T15:37:06-04:00" level=warning msg="error reading config: Config file /home/gear/.gau.toml not found, using default config"
+time="2025-08-14T15:37:10-04:00" level=warning msg="error reading config: Config file /home/gear/.gau.toml not found, using default config"
+time="2025-08-14T15:37:13-04:00" level=warning msg="error reading config: Config file /home/gear/.gau.toml not found, using default config"
+time="2025-08-14T15:37:57-04:00" level=warning msg="error reading config: Config file /home/gear/.gau.toml not found, using default config"
+http://apis.onecloud.harman.com/
+http://events.onecloud.harman.com/
+https://edgeapis.onecloud.harman.com/geo-location

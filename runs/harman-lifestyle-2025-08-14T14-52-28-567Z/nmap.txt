@@ -1,0 +1,215 @@
+# Nmap 7.95 scan initiated Thu Aug 14 13:53:24 2025 as: /usr/lib/nmap/nmap --privileged -Pn -sV -T4 -iL ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/subs.txt -oN ./runs/harman-lifestyle-2025-08-14T14-52-28-567Z/nmap.txt
+Failed to resolve "www.edgeapis.onecloud.harman.com".
+Failed to resolve "www.ota.onecloud.harman.com".
+Failed to resolve "www.apis.onecloud.harman.com".
+Failed to resolve "www.edgeapis.onecloud.harman.com".
+Failed to resolve "www.events.onecloud.harman.com".
+Failed to resolve "www.ota.onecloud.harman.com".
+Failed to resolve "www.quantum-events.onecloud.harman.com".
+Failed to resolve "www.tms.onecloud.harman.com".
+Failed to resolve "www.edgeapis.onecloud.harman.com".
+Failed to resolve "www.edgeapis.onecloud.harman.com".
+Failed to resolve "www.ota.onecloud.harman.com".
+Failed to resolve "www.ota.onecloud.harman.com".
+Nmap scan report for apis.onecloud.harman.com (3.170.91.74)
+Host is up (0.028s latency).
+Other addresses for apis.onecloud.harman.com (not scanned): 3.170.91.59 3.170.91.14 3.170.91.52
+rDNS record for 3.170.91.74: server-3-170-91-74.atl59.r.cloudfront.net
+Not shown: 998 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Amazon CloudFront httpd
+443/tcp open  ssl/http Amazon CloudFront httpd
+
+Nmap scan report for edgeapis.onecloud.harman.com (13.226.52.14)
+Host is up (0.015s latency).
+Other addresses for edgeapis.onecloud.harman.com (not scanned): 13.226.52.29 13.226.52.63 13.226.52.62
+rDNS record for 13.226.52.14: server-13-226-52-14.mia3.r.cloudfront.net
+Not shown: 998 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Amazon CloudFront httpd
+443/tcp open  ssl/http Amazon CloudFront httpd
+
+Nmap scan report for events.onecloud.harman.com (18.64.174.60)
+Host is up (0.017s latency).
+Other addresses for events.onecloud.harman.com (not scanned): 18.64.174.54 18.64.174.118 18.64.174.124
+rDNS record for 18.64.174.60: server-18-64-174-60.mia3.r.cloudfront.net
+Not shown: 998 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Amazon CloudFront httpd
+443/tcp open  ssl/http Amazon CloudFront httpd
+
+Nmap scan report for ota.onecloud.harman.com (3.21.38.183)
+Host is up (0.050s latency).
+Other addresses for ota.onecloud.harman.com (not scanned): 3.13.9.37
+rDNS record for 3.21.38.183: ec2-3-21-38-183.us-east-2.compute.amazonaws.com
+Not shown: 999 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+443/tcp open  ssl/http AWS Elastic Load Balancing
+
+Nmap scan report for quantum-events.onecloud.harman.com (108.156.83.118)
+Host is up (0.016s latency).
+Other addresses for quantum-events.onecloud.harman.com (not scanned): 108.156.83.102 108.156.83.14 108.156.83.53
+rDNS record for 108.156.83.118: server-108-156-83-118.mia3.r.cloudfront.net
+Not shown: 998 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Amazon CloudFront httpd
+443/tcp open  ssl/http Amazon CloudFront httpd
+
+Nmap scan report for tms.onecloud.harman.com (52.76.143.113)
+Host is up (0.25s latency).
+Other addresses for tms.onecloud.harman.com (not scanned): 52.74.10.211 13.228.41.100 13.228.65.56 175.41.191.197 54.251.159.28 2400:6500:ff00::36fb:9f1c 2400:6500:ff00::de4:2964 2400:6500:ff00::de4:4138 2400:6500:ff00::344c:8f71 2400:6500:ff00::af29:bfc5 2400:6500:ff00::344a:ad3
+rDNS record for 52.76.143.113: ec2-52-76-143-113.ap-southeast-1.compute.amazonaws.com
+Not shown: 998 filtered tcp ports (no-response)
+PORT     STATE SERVICE        VERSION
+443/tcp  open  ssl/https
+8443/tcp open  ssl/https-alt?
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port443-TCP:V=7.95%T=SSL%I=7%D=8/14%Time=689E22C9%P=x86_64-pc-linux-gnu
+SF:%r(GetRequest,139,"HTTP/1\.1\x20404\x20Not\x20Found\r\ncontent-type:\x2
+SF:0application/json\r\ncontent-length:\x2072\r\ndate:\x20Thu,\x2014\x20Au
+SF:g\x202025\x2017:54:16\x20GMT\r\nx-amzn-RequestId:\x20575342e8-1ea9-53f5
+SF:-b52d-955468086709\r\nconnection:\x20keep-alive\r\nx-amzn-ErrorType:\x2
+SF:0ResourceNotFoundException:\r\n\r\n{\"message\":\"Not\x20Found\",\"trac
+SF:eId\":\"575342e8-1ea9-53f5-b52d-955468086709\"}")%r(HTTPOptions,139,"HT
+SF:TP/1\.1\x20404\x20Not\x20Found\r\ncontent-type:\x20application/json\r\n
+SF:content-length:\x2072\r\ndate:\x20Thu,\x2014\x20Aug\x202025\x2017:54:17
+SF:\x20GMT\r\nx-amzn-RequestId:\x207e67cb6f-1768-0764-e180-3435c8417685\r\
+SF:nconnection:\x20keep-alive\r\nx-amzn-ErrorType:\x20ResourceNotFoundExce
+SF:ption:\r\n\r\n{\"message\":\"Not\x20Found\",\"traceId\":\"7e67cb6f-1768
+SF:-0764-e180-3435c8417685\"}")%r(FourOhFourRequest,139,"HTTP/1\.1\x20404\
+SF:x20Not\x20Found\r\ncontent-type:\x20application/json\r\ncontent-length:
+SF:\x2072\r\ndate:\x20Thu,\x2014\x20Aug\x202025\x2017:54:18\x20GMT\r\nx-am
+SF:zn-RequestId:\x20698b31f7-d221-61eb-c038-bc193cf87f06\r\nconnection:\x2
+SF:0keep-alive\r\nx-amzn-ErrorType:\x20ResourceNotFoundException:\r\n\r\n{
+SF:\"message\":\"Not\x20Found\",\"traceId\":\"698b31f7-d221-61eb-c038-bc19
+SF:3cf87f06\"}")%r(Help,171,"HTTP/1\.1\x20400\x20Bad\x20Request\r\ncontent
+SF:-type:\x20application/json\r\ncontent-length:\x2096\r\ndate:\x20Thu,\x2
+SF:014\x20Aug\x202025\x2017:54:47\x20GMT\r\nx-amzn-RequestId:\x2015b60a20-
+SF:e379-47fd-8ee2-2491cbbe5759\r\nconnection:\x20keep-alive\r\nx-amzn-Erro
+SF:rType:\x20InvalidRequestException:\r\naccess-control-allow-origin:\x20\
+SF:*\r\n\r\n{\"message\":\"text\x20is\x20empty\x20\(possibly\x20HTTP/0\.9\
+SF:)\",\"traceId\":\"15b60a20-e379-47fd-8ee2-2491cbbe5759\"}")%r(SSLSessio
+SF:nReq,171,"HTTP/1\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20applic
+SF:ation/json\r\ncontent-length:\x2096\r\ndate:\x20Thu,\x2014\x20Aug\x2020
+SF:25\x2017:54:48\x20GMT\r\nx-amzn-RequestId:\x20627b71fd-0b5c-4975-861e-8
+SF:4c090cf7c73\r\nconnection:\x20keep-alive\r\nx-amzn-ErrorType:\x20Invali
+SF:dRequestException:\r\naccess-control-allow-origin:\x20\*\r\n\r\n{\"mess
+SF:age\":\"text\x20is\x20empty\x20\(possibly\x20HTTP/0\.9\)\",\"traceId\":
+SF:\"627b71fd-0b5c-4975-861e-84c090cf7c73\"}");
+
+Nmap scan report for apis.onecloud.harman.com (108.157.173.69)
+Host is up (0.019s latency).
+Other addresses for apis.onecloud.harman.com (not scanned): 108.157.173.102 108.157.173.22 108.157.173.123
+rDNS record for 108.157.173.69: server-108-157-173-69.mia3.r.cloudfront.net
+Not shown: 998 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Amazon CloudFront httpd
+443/tcp open  ssl/http Amazon CloudFront httpd
+
+Nmap scan report for edgeapis.onecloud.harman.com (13.226.52.63)
+Host is up (0.015s latency).
+Other addresses for edgeapis.onecloud.harman.com (not scanned): 13.226.52.14 13.226.52.62 13.226.52.29
+rDNS record for 13.226.52.63: server-13-226-52-63.mia3.r.cloudfront.net
+Not shown: 998 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Amazon CloudFront httpd
+443/tcp open  ssl/http Amazon CloudFront httpd
+
+Nmap scan report for events.onecloud.harman.com (18.64.174.118)
+Host is up (0.019s latency).
+Other addresses for events.onecloud.harman.com (not scanned): 18.64.174.124 18.64.174.60 18.64.174.54
+rDNS record for 18.64.174.118: server-18-64-174-118.mia3.r.cloudfront.net
+Not shown: 998 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Amazon CloudFront httpd
+443/tcp open  ssl/http Amazon CloudFront httpd
+
+Nmap scan report for ota.onecloud.harman.com (3.13.9.37)
+Host is up (0.050s latency).
+Other addresses for ota.onecloud.harman.com (not scanned): 3.21.38.183
+rDNS record for 3.13.9.37: ec2-3-13-9-37.us-east-2.compute.amazonaws.com
+Not shown: 999 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+443/tcp open  ssl/http AWS Elastic Load Balancing
+
+Nmap scan report for quantum-events.onecloud.harman.com (108.156.83.14)
+Host is up (0.016s latency).
+Other addresses for quantum-events.onecloud.harman.com (not scanned): 108.156.83.53 108.156.83.102 108.156.83.118
+rDNS record for 108.156.83.14: server-108-156-83-14.mia3.r.cloudfront.net
+Not shown: 998 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Amazon CloudFront httpd
+443/tcp open  ssl/http Amazon CloudFront httpd
+
+Nmap scan report for tms.onecloud.harman.com (52.77.76.235)
+Host is up (0.25s latency).
+Other addresses for tms.onecloud.harman.com (not scanned): 13.214.9.234 18.139.75.53 13.213.155.155 3.0.234.173 3.1.93.115 2400:6500:ff00::dd5:9b9b 2400:6500:ff00::dd6:9ea 2400:6500:ff00::301:5d73 2400:6500:ff00::128b:4b35 2400:6500:ff00::344d:4ceb 2400:6500:ff00::300:eaad
+rDNS record for 52.77.76.235: ec2-52-77-76-235.ap-southeast-1.compute.amazonaws.com
+Not shown: 998 filtered tcp ports (no-response)
+PORT     STATE SERVICE        VERSION
+443/tcp  open  ssl/https
+8443/tcp open  ssl/https-alt?
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port443-TCP:V=7.95%T=SSL%I=7%D=8/14%Time=689E22C9%P=x86_64-pc-linux-gnu
+SF:%r(GetRequest,139,"HTTP/1\.1\x20404\x20Not\x20Found\r\ncontent-type:\x2
+SF:0application/json\r\ncontent-length:\x2072\r\ndate:\x20Thu,\x2014\x20Au
+SF:g\x202025\x2017:54:16\x20GMT\r\nx-amzn-RequestId:\x2092972899-cbed-c28b
+SF:-00b0-242d0697cf9c\r\nconnection:\x20keep-alive\r\nx-amzn-ErrorType:\x2
+SF:0ResourceNotFoundException:\r\n\r\n{\"message\":\"Not\x20Found\",\"trac
+SF:eId\":\"92972899-cbed-c28b-00b0-242d0697cf9c\"}")%r(HTTPOptions,139,"HT
+SF:TP/1\.1\x20404\x20Not\x20Found\r\ncontent-type:\x20application/json\r\n
+SF:content-length:\x2072\r\ndate:\x20Thu,\x2014\x20Aug\x202025\x2017:54:17
+SF:\x20GMT\r\nx-amzn-RequestId:\x20253a1ce7-1bfc-c187-c60c-196a5ab172fd\r\
+SF:nconnection:\x20keep-alive\r\nx-amzn-ErrorType:\x20ResourceNotFoundExce
+SF:ption:\r\n\r\n{\"message\":\"Not\x20Found\",\"traceId\":\"253a1ce7-1bfc
+SF:-c187-c60c-196a5ab172fd\"}")%r(FourOhFourRequest,139,"HTTP/1\.1\x20404\
+SF:x20Not\x20Found\r\ncontent-type:\x20application/json\r\ncontent-length:
+SF:\x2072\r\ndate:\x20Thu,\x2014\x20Aug\x202025\x2017:54:18\x20GMT\r\nx-am
+SF:zn-RequestId:\x2082caa237-52aa-c66e-1e5a-b55dc5985611\r\nconnection:\x2
+SF:0keep-alive\r\nx-amzn-ErrorType:\x20ResourceNotFoundException:\r\n\r\n{
+SF:\"message\":\"Not\x20Found\",\"traceId\":\"82caa237-52aa-c66e-1e5a-b55d
+SF:c5985611\"}")%r(Help,171,"HTTP/1\.1\x20400\x20Bad\x20Request\r\ncontent
+SF:-type:\x20application/json\r\ncontent-length:\x2096\r\ndate:\x20Thu,\x2
+SF:014\x20Aug\x202025\x2017:54:47\x20GMT\r\nx-amzn-RequestId:\x2008c907c2-
+SF:a2b2-4f38-aecd-4f29fb289970\r\nconnection:\x20keep-alive\r\nx-amzn-Erro
+SF:rType:\x20InvalidRequestException:\r\naccess-control-allow-origin:\x20\
+SF:*\r\n\r\n{\"message\":\"text\x20is\x20empty\x20\(possibly\x20HTTP/0\.9\
+SF:)\",\"traceId\":\"08c907c2-a2b2-4f38-aecd-4f29fb289970\"}")%r(SSLSessio
+SF:nReq,171,"HTTP/1\.1\x20400\x20Bad\x20Request\r\ncontent-type:\x20applic
+SF:ation/json\r\ncontent-length:\x2096\r\ndate:\x20Thu,\x2014\x20Aug\x2020
+SF:25\x2017:54:48\x20GMT\r\nx-amzn-RequestId:\x201ff7b255-593d-4119-8a14-7
+SF:e4c307daca6\r\nconnection:\x20keep-alive\r\nx-amzn-ErrorType:\x20Invali
+SF:dRequestException:\r\naccess-control-allow-origin:\x20\*\r\n\r\n{\"mess
+SF:age\":\"text\x20is\x20empty\x20\(possibly\x20HTTP/0\.9\)\",\"traceId\":
+SF:\"1ff7b255-593d-4119-8a14-7e4c307daca6\"}");
+
+Failed to resolve "www.ota.onecloud.harman.com".
+Nmap scan report for edgeapis.onecloud.harman.com (13.226.52.14)
+Host is up (0.018s latency).
+Other addresses for edgeapis.onecloud.harman.com (not scanned): 13.226.52.62 13.226.52.63 13.226.52.29
+rDNS record for 13.226.52.14: server-13-226-52-14.mia3.r.cloudfront.net
+Not shown: 998 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Amazon CloudFront httpd
+443/tcp open  ssl/http Amazon CloudFront httpd
+
+Nmap scan report for events.onecloud.harman.com (18.64.174.118)
+Host is up (0.021s latency).
+Other addresses for events.onecloud.harman.com (not scanned): 18.64.174.54 18.64.174.124 18.64.174.60
+rDNS record for 18.64.174.118: server-18-64-174-118.mia3.r.cloudfront.net
+Not shown: 998 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+80/tcp  open  http     Amazon CloudFront httpd
+443/tcp open  ssl/http Amazon CloudFront httpd
+
+Nmap scan report for ota.onecloud.harman.com (3.21.38.183)
+Host is up (0.054s latency).
+Other addresses for ota.onecloud.harman.com (not scanned): 3.13.9.37
+rDNS record for 3.21.38.183: ec2-3-21-38-183.us-east-2.compute.amazonaws.com
+Not shown: 999 filtered tcp ports (no-response)
+PORT    STATE SERVICE  VERSION
+443/tcp open  ssl/http AWS Elastic Load Balancing
+
+Failed to resolve "www.ota.onecloud.harman.com".
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+# Nmap done at Thu Aug 14 13:57:10 2025 -- 15 IP addresses (15 hosts up) scanned in 226.16 seconds

@@ -1,174 +1,164 @@
-# GEARZ OPS — Retro Recon CLI
+# 🕹️ GEARZ OPS
+## Retro recon, organized in your terminal
 
-> A cinematic, hacker-core terminal suite for **real** bug bounty hunts.  
-> Keep your neon banners, chain your tools, log every move, ship reports fast.
+GEARZ OPS is an experimental Node.js CLI for planning authorized security-tool workflows, running selected tools, and keeping their output together. It combines a neon terminal interface with a shared tool registry, interactive scope notes, command history, and lightweight findings summaries.
 
-![banner](./.github/gearz-banner.png)
+**Status: development prototype.** Scope controls are advisory, shell commands use unvalidated input, and tool failures can be masked by pipelines. Read the [safety notes](#safety-and-data-handling) before running any workflow.
 
----
+## What it does
 
-## ✨ What is GEARZ OPS?
+- **Flow:** build a four-stage plan, review tool selections, and optionally execute them in order
+- **Recon:** select a discovery preset or save a custom tool selection
+- **Scope Board:** record in-scope and out-of-scope items and copy them into run folders
+- **Findings:** collect parameter names, endpoint lines, high/critical Nuclei output, and interesting paths
+- **Timeline:** inspect command history and manage stored runs
+- **Terminal presentation:** colorful banners and a static ASCII workflow diagram
 
-**GEARZ OPS** is a purpose-built CLI that drives a complete bounty workflow with a *retro gamer aesthetic*:
+This repository contains the local CLI. It does not implement an AI assistant or a desktop application. Files for payload, report, style, and vault features exist, but the current entry point does not expose those commands.
 
-- **Flow Mode** (guided 4-stage chain)  
-- **Recon Mode** (quick presets)  
-- **Timeline** (command history & run notes)  
-- **Visualize** (ASCII kill chain)  
-- **Fail-soft execution** (missing tools don’t crash the run)  
-- **Dry-run** planning (see the exact commands before you fire)
+## Safety and data handling
 
-The tool writes clean run artifacts to `runs/<runId>/` so you can triage, share, and report with receipts.
+- Run tools only against assets you own or have explicit, current authorization to assess. Public availability is not permission.
+- **Scope is not enforced end to end.** Confirmation prompts record your acknowledgment; `outScope` entries are not automatically applied as a target filter. Discovery and crawling can produce hosts outside the approved scope.
+- **Treat inputs as trusted shell input.** Domains, paths, run IDs, and other values are interpolated into command strings executed with `shell: true`. Do not accept untrusted input, paste shell metacharacters, or expose this CLI as a shared service.
+- Review discovered hosts and URLs before active probing, crawling, vulnerability scanning, or content discovery. A preset name does not establish that its actions are allowed.
+- Commands and output are stored in `command-history.json` and `runs/`. They can contain private targets, tokens, headers, or findings. Review and redact them before sharing screenshots or files.
+- The repository currently tracks dependency files, environment configuration, and historical run artifacts. Their presence does not grant permission to reuse targets or disclose data. Review local configuration and `git status` carefully before committing anything.
 
-> ⚠️ **Scope first. Safety always.** GEARZ only acts on *public, in-scope* assets. If a target isn’t confirmed, the CLI warns and skips.
+## Requirements
 
----
+- Node.js and npm compatible with [`package-lock.json`](package-lock.json). The locked dependency engine ranges require at least Node.js 20.5; Node 18 is insufficient for Commander 14 and Ink 6.
+- Linux or WSL with Bash and GNU-style command-line utilities. Commands use tools such as `timeout`, `xargs -a`, `awk`, `sed`, `sort`, `tee`, and `jq`; macOS may require equivalents and command adjustments.
+- An interactive terminal and write access to the repository directory
+- Only the third-party tools needed for your chosen workflow, installed separately and available on `PATH`
 
-## 🕹 Aesthetic & Themes
+The registry includes subfinder, Amass, assetfinder, curl/crt.sh, ProjectDiscovery httpx, Naabu, Nmap, gau, waybackurls, Katana, LinkFinder, Nuclei, Dalfox, ffuf, dirsearch, and feroxbuster. Python's HTTPX package is not the ProjectDiscovery executable.
 
-Each screen uses neon banners from `utils/ui.js`:
-- **Init** → `atlas`
-- **Flow** → `vice`
-- **Recon** → `summer`
-- **Visualize** → `fruit`
+Some entries have additional requirements: LinkFinder expects Python 3 and an importable `linkfinder` module; ffuf and feroxbuster use a hard-coded SecLists wordlist path. Review [`utils/tools.js`](utils/tools.js) before installing or selecting tools.
 
-No `console.clear()` anywhere. Output stacks for screenshots.
+## Install and inspect
 
----
-
-## 🧭 The 4-Stage Flow (bounty-tested)
-
-**Stage 1 — Passive → `subs.txt`**  
-`subfinder`, `amass`, `assetfinder`, `crtsh` (etc.)
-
-**Stage 2 — Active → `hosts.txt`**  
-`httpx`, `naabu`, `nmap`
-
-**Stage 3 — URLs/JS → `urls.txt` (+ `js/`)**  
-`gau`, `waybackurls`, `katana`, `linkfinder`
-
-**Stage 4 — Vulns/Fuzz → logs**  
-`nuclei`, `dalfox`, `ffuf`, `dirsearch`, `feroxbuster`
-
-GEARZ orchestrates tools from `utils/tools.js` so Flow/Recon stay clean.
-
----
-
-## 📦 Requirements
-
-- **Node 18+** (built-in `fetch`)  
-- UNIX-like shell (Linux/macOS/WSL). Windows users: run in **WSL**.  
-- Optional third-party binaries on your `$PATH` (GEARZ detects and skips missing ones):
-  - Passive: `subfinder`, `amass`, `assetfinder`, curl for crt.sh
-  - Active: `httpx`, `naabu`, `nmap`
-  - URLs/JS: `gau`, `waybackurls`, `katana`, `linkfinder` (Py)
-  - Vulns/Fuzz: `nuclei`, `dalfox`, `ffuf`, `dirsearch`, `feroxbuster`
-
-> Tip: GEARZ won’t crash if a binary is missing — it neon-warns, then continues.
-
----
-
-## 🚀 Install & First Run
+Run commands from the repository root. Some files are resolved relative to the current directory and others relative to the source tree.
 
 ```bash
-# WSL example
-cd /mnt/e/gearz-cli-ops
-npm i
+git clone https://github.com/Gearsoldier/gearz-cli-ops.git
+cd gearz-cli-ops
+npm ci
 
-# sanity banners
-node bin/gearz.mjs init
+# Local inspection only; these commands do not launch reconnaissance
 node bin/gearz.mjs visualize
+node bin/gearz.mjs scope --show
+node bin/gearz.mjs alias
+```
 
-# create a run id (UTC)
-export RUN="$(date -u +'%Y-%m-%dT%H-%M-%S-%3NZ')"
+Use `node bin/gearz.mjs <command>` throughout. The package has no `bin` mapping that installs a global `gearz` command.
 
-# dry-run plan (no scanning yet)
-node bin/gearz.mjs flow --run "$RUN" --dry-run
-Artifacts will land under:
+**No general help command is implemented.** No command, an unknown command, or `--help` falls through to `init`, which is an interactive setup flow rather than a read-only help screen.
 
-runs/<runId>/
-  ├─ subs.txt
-  ├─ hosts.txt
-  ├─ urls.txt
-  ├─ *.log     (per-tool logs)
-  └─ js/       (extracted JS, optional)
-🧪 Free “Recon Mode” (fast presets)
+### Optional local setup
 
-# show recon presets and pick
-node bin/gearz.mjs recon --run "$RUN" --dry-run
-Presets and command strings live in utils/tools.js. Add your own chains there, not in Flow/Recon.
+`node bin/gearz.mjs init` checks for tool binaries, creates local working directories, and writes `.env.gearz` from interactive answers. It can overwrite an existing configuration file, so back up any settings you need first.
 
-🧱 Scope Board (simple)
-You can seed a scope file and pass it to Flow:
+Flow auto-loads the current directory's `.env.gearz`; Recon does not. Review the file before loading it into a shell. Do not source unfamiliar configuration or put secrets in tracked files.
 
-echo "example.com" > runs/$RUN/scope.txt
-node bin/gearz.mjs flow --run "$RUN" --scope "runs/$RUN/scope.txt" --dry-run
-GEARZ will refuse to target domains outside your provided scope.
+Key settings include:
 
-📜 Timeline & Screenshots
-Everything you run is logged:
+- `RPS`: passed to selected tools that implement a rate flag; it is not a global request limit
+- `KATANA_TIMEOUT`, `NUCLEI_TIMEOUT`, and `NUCLEI_SEV`: selected crawler/scanner settings
+- `GEARZ_RETRIES`, `GEARZ_BACKOFF_MS`, and `GEARZ_BACKOFF_FACTOR`: retry behavior for nonzero exits with matching rate-limit or timeout text
+- `RATE_DELAY_MS`: delay between Flow tools
+- `GEARZ_SKIP`: comma-separated patterns used in selected URL filters, not an authorization boundary
+- `XBB`: optional HTTP header used by selected tool commands
 
-node bin/gearz.mjs timeline --run "$RUN"
-Use the stacked output for social content and internal notes. No destructive clears.
+## Plan before executing
 
-🕵️ Triage Routine (copy/paste)
+Flow groups tools into passive discovery, active probing, URL/JavaScript collection, and vulnerability/content-discovery stages.
 
-# top 50 live hosts
-sed -n '1,50p' "runs/$RUN/hosts.txt"
+```bash
+# Interactive planning; keep --dry-run while reviewing the command strings
+node bin/gearz.mjs flow --run local-plan --dry-run
 
-# interesting URLs (params)
-grep -E '\?.*=' "runs/$RUN/urls.txt" | sort -u | sed -n '1,100p'
+# Recon planning with an automatically generated run ID
+node bin/gearz.mjs recon --dry-run
+```
 
-# quick nuclei on live hosts (example)
-nuclei -l "runs/$RUN/hosts.txt" -o "runs/$RUN/nuclei-quick.log"
-🛡 Fail-Soft Behavior
-Missing binary? Neon warning → tool skipped → run continues.
+Use a plain, authorized domain when prompted. For an offline planning walkthrough, `example.invalid` is a reserved placeholder; never remove `--dry-run` for that example.
 
-Empty dependency file? Downstream stage auto-skips with an explanation.
+Dry runs skip the selected reconnaissance tool commands, but can still create run folders, copy scope files, seed `subs.txt`, save an interactively requested preset, and perform local binary checks. They are not a no-write mode.
 
-SIGINT / Ctrl-C? Prompts exit cleanly; no crashes.
+Removing `--dry-run` starts real tool execution. Review every generated command and each tool's options first. The shell pipelines are not a security sandbox.
 
-🧰 Extend GEARZ (the right way)
-Add all tool strings & presets in utils/tools.js only.
+### Scope Board
 
-Flow/Recon just orchestrate categories.
+`node bin/gearz.mjs scope` opens the interactive editor. The board is stored in `scope.json` with `inScope`, `outScope`, `notes`, and `updatedAt` fields.
 
-Logs must tee to runs/<runId>/<tool>.log.
+- `scope --show`: display the current board
+- `scope --export <file>`: write a copy
+- `scope --import <file>`: replace the board; add `--merge` to combine entries
+- `scope --clear`: immediately replace the board with empty lists
 
-Never write ad-hoc commands in commands/flow.js or commands/recon.js.
+Flow normally copies the board and seeds `subs.txt` from its in-scope entries. `--no-scope` disables that copying/seeding. Recon's `--from-scope` offers a target picker.
 
-🧩 Troubleshooting
-WSL pathing
+Flow does **not** parse a `--scope` flag. Some tool builders accept a file path entered at the target prompt, but that is input expansion rather than allowlist enforcement. Recon also does not honor `--run`; it creates a new timestamped run.
 
-which subfinder || echo "Install subfinder and export PATH"
-Permissions
+## Commands and artifacts
 
-chmod +x bin/gearz.mjs
-Node version
+The active entry point supports `init`, `flow`, `recon`, `scope`, `findings`, `timeline`, `alias`, `visualize`, and `update`.
 
-node -v   # ensure 18+
-No output files?
-Run with --dry-run first to confirm the plan. Then drop --dry-run.
+Useful inspection and reporting commands:
 
-🗺 Roadmap
-Scope importer & labels
+```bash
+# List saved custom presets; this is not a list of built-in presets
+node bin/gearz.mjs recon --list-presets
 
-Findings markdown generator (timeline --report)
+# Replace the placeholder with an existing local run ID
+node bin/gearz.mjs timeline --run RUN_ID
+node bin/gearz.mjs findings --run RUN_ID
+```
 
-Tighter presets & tags
+`findings` writes or replaces files under the chosen run's `findings/` directory. Flow also aggregates findings after execution. These summaries use simple text matching, not a validated vulnerability-report format.
 
-Optional AI mentor (paid desktop edition)
+Depending on the tools selected, a run may contain:
 
-This repo is the free CLI (no AI). The paid desktop adds an on-screen assistant and one-click “Run in Shell”.
+- `subs.txt`, `hosts.txt`, and `urls.txt`: intermediate discovery output
+- `<tool>.log`: streamed stdout and stderr
+- Tool-specific files such as `nuclei.txt`, `dalfox.txt`, and `linkfinder.txt`
+- `js/`: downloaded JavaScript when that collection step runs
+- `scope.json`, `in-scope.txt`, and `out-of-scope.txt`: copied scope notes
+- `findings/`: derived text files and `summary.json`
 
-🔐 Ethics
-Only test in-scope assets you have permission to assess. You are responsible for your use of this software.
+Timeline includes archive, restore, history cleanup, and permanent-delete actions. Read its prompts carefully and keep backups of anything you need. The `update` command runs `git pull origin main` in the current working directory; it is not just an update check.
 
-📝 License
-MIT — see LICENSE.
+## Current limitations
 
-🙌 Contributing
-PRs welcome. Keep the retro vibe; no console.clear(); keep commands centralized in utils/tools.js.
+- **Partial tool checks:** a missing primary executable or a missing declared input can cause a step to be skipped. Secondary dependencies and every input format are not checked.
+- **Exit status reliability:** pipelines lack comprehensive `pipefail` handling, and some commands deliberately end successfully after an error. A green completion message does not establish that a tool succeeded.
+- **Tool compatibility:** external tool versions are not pinned, and generated flags may need updates. Inspect logs and verify behavior against the version installed.
+- **Data flow:** some presets start downstream stages without producing required inputs. A tool may therefore skip or use previously prepared artifacts.
+- **Registry mismatch:** the built-in vulnerability preset references `sqlmap`, but no matching tool entry is registered.
+- **Target filtering:** Katana and Nuclei prefer a nonempty `hosts_scoped.txt` if one exists; the current Flow/Recon code does not generate that filtered file.
+- **Validation:** there is no automated test suite or lint/build script. `npm test` is the default placeholder that deliberately exits with an error. Installation and interactive tool execution still need separate verification.
 
-👤 Author
+## Project map
+
+- [`bin/gearz.mjs`](bin/gearz.mjs): command dispatch
+- [`commands/flow.js`](commands/flow.js): staged planning and execution
+- [`commands/recon.js`](commands/recon.js): reconnaissance presets and selection
+- [`utils/tools.js`](utils/tools.js): tool command builders and built-in presets
+- [`utils/runTool.js`](utils/runTool.js): execution, logs, history, and retries
+- [`utils/scope.js`](utils/scope.js): scope storage and run copies
+- [`utils/presets.js`](utils/presets.js): custom preset storage
+- [`commands/findings.js`](commands/findings.js): lightweight aggregation
+- [`commands/timeline.js`](commands/timeline.js): run and history management
+
+## Contributing
+
+Keep the retro terminal style and preserve readable, stacked output. Centralize shared tool definitions in `utils/tools.js`; keep orchestration in the command modules. Use synthetic fixtures and reserved domains when documenting or testing changes, and describe any external tools or network activity required to reproduce an issue.
+
+## License status
+
+`package.json` declares ISC, but the repository has no first-party `LICENSE` file. The earlier README's MIT statement conflicts with that metadata. The maintainer needs to clarify the intended license; this documentation does not choose or grant new license terms. Third-party dependencies retain their own licenses.
+
+## Author
+
 Gear
